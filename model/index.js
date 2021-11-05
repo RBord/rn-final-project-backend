@@ -1,1 +1,3 @@
-module.exports = {}
+const User = require('./user')
+
+module.exports = { User }
