@@ -18,8 +18,6 @@ const signup = async (req, res) => {
 
   sendSuccess.users(res, {
     email,
-    subcriprion: newUser.subscription,
-    avatarURL: newUser.avatarURL,
   })
 }
 
@@ -27,12 +25,12 @@ const { SECRET_KEY } = process.env
 
 const signin = async (req, res) => {
   const { email, password } = req.body
-  const user = await User.findOne({ email }, '_id email password subscription ')
+  const user = await User.findOne({ email }, '_id email password  ')
   if (!user || !user.comparePassword(password)) {
     throw new BadRequest('Email or password is wrong')
   }
 
-  const { _id, subscription } = user
+  const { _id } = user
   const payload = {
     _id,
   }
@@ -40,7 +38,7 @@ const signin = async (req, res) => {
 
   await User.findByIdAndUpdate(_id, { token })
 
-  sendSuccess.users(res, { token, email, subscription })
+  sendSuccess.users(res, { token, email })
 }
 
 const signout = async (req, res) => {
@@ -50,8 +48,8 @@ const signout = async (req, res) => {
 }
 
 const currentUser = async (req, res) => {
-  const { email, subscription } = req.user
-  sendSuccess.users(res, { email, subscription })
+  const { email } = req.user
+  sendSuccess.users(res, { email })
 }
 module.exports = {
   signup,

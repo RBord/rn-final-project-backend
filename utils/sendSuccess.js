@@ -10,10 +10,5 @@ const users = (res, user, status = 200) => {
     user,
   })
 }
-const avatar = (res, avatarURL, status = 200) => {
-  res.status(status).json({
-    avatarURL,
-  })
-}
 
-module.exports = { contacts, users, avatar }
+module.exports = { contacts, users }
