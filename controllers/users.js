@@ -4,28 +4,26 @@ const { User } = require('../model')
 const { sendSuccess } = require('../utils')
 
 const signup = async (req, res) => {
-  const { email, password } = req.body
+  const { name, email, password } = req.body
 
   const user = await User.findOne({ email })
   if (user) {
     throw new Conflict('Email in use')
   }
-  const newUser = new User({ email })
+  const newUser = new User({ name, email })
 
   newUser.setPassword(password)
 
   await newUser.save()
 
-  sendSuccess.users(res, {
-    email,
-  })
+  sendSuccess.users(res, { name, email })
 }
 
 const { SECRET_KEY } = process.env
 
 const signin = async (req, res) => {
   const { email, password } = req.body
-  const user = await User.findOne({ email }, '_id email password  ')
+  const user = await User.findOne({ email }, '_id name email password  ')
   if (!user || !user.comparePassword(password)) {
     throw new BadRequest('Email or password is wrong')
   }

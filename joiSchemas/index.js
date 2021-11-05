@@ -1,3 +1,4 @@
-const userSchema = require('./user')
+const userLoginSchema = require('./userLogin')
+const userRegistrySchema = require('./userRegistry')
 
-module.exports = { userSchema }
+module.exports = { userLoginSchema, userRegistrySchema }
