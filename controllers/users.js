@@ -1,14 +1,14 @@
-const { Conflict, BadRequest } = require("http-errors")
-const jwt = require("jsonwebtoken")
-const { User } = require("../model")
-const { sendSuccess } = require("../utils")
+const { Conflict, BadRequest } = require('http-errors')
+const jwt = require('jsonwebtoken')
+const { User } = require('../model')
+const { sendSuccess } = require('../utils')
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body
 
   const user = await User.findOne({ email })
   if (user) {
-    throw new Conflict("Email in use")
+    throw new Conflict('Email in use')
   }
   const newUser = new User({ name, email })
   newUser.setPassword(password)
@@ -19,9 +19,9 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   const { email, password } = req.body
-  const user = await User.findOne({ email }, "_id name email password  ")
+  const user = await User.findOne({ email }, '_id name email password  ')
   if (!user || !user.comparePassword(password)) {
-    throw new BadRequest("Email or password is wrong")
+    throw new BadRequest('Email or password is wrong')
   }
 
   // const { _id } = user

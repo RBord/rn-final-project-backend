@@ -1,24 +1,24 @@
-const { Schema, model } = require("mongoose")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-require("dotenv").config()
+const { Schema, model } = require('mongoose')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const userSchema = new Schema(
   {
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: [true, 'Password is required'],
     },
 
     name: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, 'Name is required'],
       unique: true,
     },
 
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: [true, 'Email is required'],
       unique: true,
     },
     token: {
@@ -54,6 +54,6 @@ userSchema.methods.createToken = function () {
   return jwt.sign(payload, SECRET_KEY)
 }
 
-const User = model("user", userSchema)
+const User = model('user', userSchema)
 
 module.exports = User
