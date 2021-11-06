@@ -1,4 +1,4 @@
-const { Conflict, BadRequest, Unauthorized } = require("http-errors")
+const { Conflict, BadRequest } = require("http-errors")
 const jwt = require("jsonwebtoken")
 const { User } = require("../model")
 const { sendSuccess } = require("../utils")
