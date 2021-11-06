@@ -14,7 +14,7 @@ const { users: auth } = require('../../controllers')
 const router = express.Router()
 
 router.post(
-  '/singup',
+  '/signup',
   validation(userRegistrySchema),
   controllerWrapper(auth.signup)
 )
@@ -36,5 +36,7 @@ router.post(
 router.post('/logout', authenticate, controllerWrapper(auth.signout))
 
 router.get('/current', authenticate, controllerWrapper(auth.currentUser))
+
+router.post('/balance', authenticate, controllerWrapper(auth.updateBalance))
 
 module.exports = router
